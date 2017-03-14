@@ -14,20 +14,20 @@ class Semafor:
         frame.pack()
 
         # ustvarimo gumbe
-        gumb_zelena = tk.Button(frame, text = "Zelena", command = self.spremeni_barvo("green"))
+        gumb_zelena = tk.Button(frame, text = "Zelena", command = lambda: self.spremeni_barvo("green"))
         gumb_zelena.pack()
 
-        gumb_rumena = tk.Button(frame, text = "Rumena", command = self.spremeni_barvo("yellow"))
+        gumb_rumena = tk.Button(frame, text = "Rumena", command = lambda: self.spremeni_barvo("yellow"))
         gumb_rumena.pack()
 
-        gumb_rdeca = tk.Button(frame, text = "Rdeča", command = self.spremeni_barvo("red"))
+        gumb_rdeca = tk.Button(frame, text = "Rdeča", command = lambda: self.spremeni_barvo("red"))
         gumb_rdeca.pack()
 
 
     def spremeni_barvo(self, barva):
         '''Spremeni barvo ozadja.'''
-        root.configure(background = barva)
-        # root[bg] = barva
+        # root.configure(background = barva)
+        root.configure(bg = barva)
     
 
 
