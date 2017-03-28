@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 
 # Področje, na katerega lahko rišemo lomljeno črto.
-# S pritiskom na levi gumb začnemo risati novo lomljeno črto,
-# z desnim gumbom nadaljujemo prejšnjo črto.
+# S pritiskom na desni gumb začnemo risati novo lomljeno črto,
+# z levim gumbom nadaljujemo prejšnjo črto.
 
 from tkinter import *
 
@@ -21,7 +21,7 @@ class Crta():
         self.canvas.bind("<Button-1>", self.nadaljuj_crto)
 
         # Registiramo se za klike z desnim gumbom na canvasu
-        self.canvas.bind("<Button-2>", self.zacni_crto)
+        self.canvas.bind("<Button-3>", self.zacni_crto)
 
 
     def nadaljuj_crto(self, event):
