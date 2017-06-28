@@ -1,4 +1,4 @@
-# razred Datum
+# Datum
 
 from datetime import *
 now = datetime.now()
@@ -33,7 +33,7 @@ class Datum:
         self.dan = dan if dan else now.day
         self.mesec = mesec if mesec else now.month
         self.leto  = leto if leto else now.year
-        #preverjamo veljavnost
+        # Preverjamo veljavnost
         if not je_veljaven_datum(self.dan, self.mesec, self.leto):
             raise Exception('Datum ni veljaven.')
 
@@ -56,9 +56,9 @@ class Datum:
         if self.mesec == 1:
             return self.dan
         zap_dan = 0
-        for mesec in range(self.mesec): # do trenutnega meseca
+        for mesec in range(self.mesec): # Do trenutnega meseca
             zap_dan += stevilo_dni(mesec, self.leto)
-        zap_dan += self.dan # še trenutni mesec
+        zap_dan += self.dan # Še trenutni mesec
         return zap_dan
 
 def datumIzNiza(niz):
@@ -78,27 +78,26 @@ def datumIzEMSO(emso):
 def razlika_datumov(dat1, dat2):
     '''Vrne število dni med dvema datumoma.'''
     dat1, dat2 = min(dat1, dat2), max(dat1, dat2)
-    # če sta istega leta
+    # Če sta istega leta
     if dat1.leto == dat2.leto:
         return dat2.danVLetu() - dat1.danVLetu()
-    # če nista istega leta
-    # najprej izračunamo, koliko dni je še do konca leta prvega datuma
+    # Če nista istega leta, najprej izračunamo, koliko dni je še do konca leta prvega datuma
     do_konca = 366 if je_prestopno(dat1.leto) else 365
     do_konca -= dat1.danVLetu()
-    # vmesna leta
+    # Vmesna leta
     vmes = 0
     for leto in range(dat1.leto + 1, dat2.leto):
         vmes += 366 if je_prestopno(dat1.leto) else 365
-    # do datuma 2
+    # Do drugega datuma
     do_dat2 = dat2.danVLetu()
     return do_konca + vmes + do_dat2
 
 def najmanjsi_datum(imeDatoteke):
     '''Prebere datume iz datoteke in izpiše najmanjšega.'''
-    najm = None # da ne bi slučajno izbrali manjšega od najmanjšega
+    najm = None # Da ne bi slučajno izbrali manjšega od najmanjšega
     for vr in open(imeDatoteke, 'r', encoding = 'utf-8'):
         trenutniDat = datumIzNiza(vr.strip())
-        #  to je zelo pomembno is None -> damo prvega iz datoteke
+        #  To je zelo pomembno is None -> damo prvega iz datoteke
         if najm is None or trenutniDat < najm:
             najm = trenutniDat
     return najm
@@ -109,29 +108,29 @@ def datumi(dat1, dat2):
     (dan, mesec, leto) = (dat1.dan, dat1.mesec, dat1.leto)
     while Datum(dan, mesec, leto) != dat2:
         yield Datum(dan, mesec, leto)
-        # dodamo en dan datumu 1
+        # Dodamo en dan datumu 1
         if dan < stevilo_dni(mesec, leto):
             dan += 1
-        else: # skočimo za en mesec naprej 
-            if mesec == 12: # skočimo za eno leto naprej
+        else: # Skočimo za en mesec naprej
+            if mesec == 12: # Skočimo za eno leto naprej
                 (dan, mesec, leto) = (1, 1, leto + 1)
             else:
                 (dan, mesec) = (1, mesec + 1)
-    yield dat2 # še zadnjega
+    yield dat2 # Še zadnjega
 
             
 
-d1 = Datum() # današnji datum
+d1 = Datum() # Današnji datum
 d2 = Datum(1, 2, 1990)
 d3 = Datum(24, 4, 2002)
 d4 = Datum(24, 10, 2070)
 
 d5 = datumIzNiza('1.1.1998')
-d5.danVLetu
 
 d6 = datumIzEMSO('0102990500131')
 starSem = razlika_datumov(d2, d1)
 studiram = razlika_datumov(Datum(1,10,2009), d1)
 
 print('Najmanjši datum je:', najmanjsi_datum('datumi.txt'), '\n')
-print([x for x in datumi(Datum(8, 12, 2016), d1)])
+
+print([x for x in datumi(Datum(8, 12, 2016), d1)]) # Zgenerira datume od 8. 12. 2016 do današnjega datuma

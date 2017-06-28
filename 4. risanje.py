@@ -75,6 +75,7 @@ def torta(platno, podatki, x, y, r):
 
 class Risanje:
     def __init__(self, master):
+        # V __init__ damo vse objekte, menije in ukaze
         self.dim = 800
         self.platno = tk.Canvas(master, width=self.dim, height=self.dim)
         self.platno.pack(side=tk.RIGHT)
@@ -82,12 +83,12 @@ class Risanje:
         self.premikamo = None
 
 
-        # ustvarimo menu in podmenuje
+        # Ustvarimo menu in podmenuje
         menu = tk.Menu(master)
         menuNarisi = tk.Menu(menu, tearoff=0)
         menuPobrisi = tk.Menu(menu, tearoff=0)
 
-        # dodamo ukaze
+        # Dodamo ukaze
         menuNarisi.add_command(label="Nariši piramido", command=self.piramida)
         menuNarisi.add_command(label="Nariši tarčo", command=self.tarca)
         menuNarisi.add_command(label="Nariši trikotnike", command=self.trikotniki)
@@ -96,21 +97,21 @@ class Risanje:
         menuPobrisi.add_command(label="Pobriši enega", command=self.pobrisi_enega)
         menuPobrisi.add_command(label="Pobriši vse", command=self.pobrisi_vse)
 
-        # okno skonfiguriramo tako, da vsebuje željeni menu in podmenuje
+        # Okno skonfiguriramo tako, da vsebuje željeni menu in podmenuje
         master.config(menu=menu)
         menu.add_cascade(label="Nariši", menu=menuNarisi)
         menu.add_cascade(label="Pobriši", menu=menuPobrisi)
 
 
-        # ustvarimo okno za parametre
+        # Ustvarimo okno za parametre
         okno = tk.Frame(master)
         okno.pack()
-        # napisi
+        # Napisi
         tk.Label(okno, text="Parametri").grid(row=1, column=1)
         tk.Label(okno, text="Položaj x:").grid(row=2, column=1)
         tk.Label(okno, text="Položaj y:").grid(row=3, column=1)
         tk.Label(okno, text="Velikost").grid(row=4, column=1)
-        # vnosna polja
+        # Vnosna polja
         self.parametri = tk.Entry(okno)
         self.parametri.grid(row=1, column=2)
         self.polozaj_x = tk.Entry(okno)
@@ -120,9 +121,15 @@ class Risanje:
         self.velikost = tk.Entry(okno)
         self.velikost.grid(row=4, column=2)
 
-        # registriramo se za klik z miško
+        # Registriramo se za klik z miško
         self.platno.bind('<Button-1>', self.kateri_lik)
         self.platno.bind('<B1-Motion>', self.premakni_lik)
+
+        # Iz konstruktorja takoj narišemo like, če bi želeli
+        # piramida(self.platno, 10, self.dim/2, 50, 20)
+        # tarca(self.platno, 50, self.dim / 2, self.dim / 2, 20)
+        # trikotniki(self.platno, 8, 10, self.dim, 700)
+        # torta(self.platno, [8, 3, 5, 7], self.dim / 2, self.dim / 2, 200)
 
     def kateri_lik(self, event):
         self.x, self.y = event.x, event.y
@@ -192,11 +199,7 @@ class Risanje:
         
 
 
-        # iz konstruktorja pokličemo funkcije
-        # piramida(self.platno, 10, self.dim/2, 50, 20)
-        # tarca(self.platno, 50, self.dim / 2, self.dim / 2, 20)
-        # trikotniki(self.platno, 8, 10, self.dim, 700)
-        # torta(self.platno, [8, 3, 5, 7], self.dim / 2, self.dim / 2, 200)
+
         
 
 

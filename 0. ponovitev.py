@@ -1,9 +1,23 @@
-#multifakulteta
+# Multifakulteta
 
 def multifakulteta(n, k):
-    '''Izračuna multifakultetao.'''
+    '''Izračuna multifakulteto.'''
+    rez = 1
+    while n > 0:
+        rez *= n
+        n -= k
+    return rez
 
-#kolokviji
+print(multifakulteta(6,1 )) # Navadna fakulteta 6!
+print(multifakulteta(8,2)) # 8 * 6 * 4 * 2
+print(multifakulteta(13,3), '\n')
+
+
+# Štetje
+
+
+
+# Kolokviji
 
 def nabor(niz):
     '''Spremeni iz niza v nabor.'''
@@ -33,22 +47,49 @@ def vsote(vhodna, izhodna):
             print(ime, ', ', sum(ocene), file = f, sep = '')
 
 vsote('kolokviji.txt', 'sestevki.txt')
+print()
 
-#posredno prevajanje
+
+# Štetje
+
+def stetje(niz):
+    '''Z iteracijo po nizu.'''
+    nov_niz = ''
+    stevec = 1
+    for znak in niz:
+        if znak == '#':
+            nov_niz += str(stevec)
+            stevec += 1
+        else:
+            nov_niz += znak
+    return nov_niz
+
+def stetjeV2(niz):
+    '''Znak # nadomesti z zaporedno številko od 1 naprej.'''
+    stLojtr = niz.count('#')
+    nizOklepaji = '{}'.join(niz.split('#')) # Ustvarimo pogoje za format
+    return nizOklepaji.format(*[i for i in range(1, stLojtr + 1)]) # Ukaz *[seznam] razpakira vrednosti v seznamu, npr
+                                                                   # *[1, 2, 3] -> 1, 2, 3
+
+print(stetje('a# b# ### -#-#- (#,#) xy # #'))
+print(stetjeV2('a# b# ### -#-#- (#,#) xy # #'), '\n')
+
+
+# Posredno prevajanje
 
 def prevedi(slo_ang, ang_nem):
     '''Prevede iz slovenščine v angleščino, nato v nemščino.'''
     prevod = dict()
     for geslo, prevod_ang in slo_ang.items():
-        prevod_nem = ang_nem.get(prevod_ang, '')
+        prevod_nem = ang_nem.get(prevod_ang, None) # Če gesla ni, vrne None
         if prevod_nem:
             prevod[geslo] = prevod_nem
     return prevod
 
-print(prevedi({'miza': 'table', 'jaz': 'I'}, {'table': 'Tisch', 'love': 'Liebe'}))
+print(prevedi({'miza': 'table', 'jaz': 'I'}, {'table': 'Tisch', 'love': 'Liebe'}), '\n')
 
 
-#kuhamo in pečemo
+# Kuhamo in pečemo
 
 def pomnozi(recept, faktor):
     '''Sestavi in vrne nov recept.'''

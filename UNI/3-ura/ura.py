@@ -2,7 +2,7 @@ import tkinter as tk
 import math
 import time
 
-
+# NALOGA NI IZDELANA
 
 class Ura():
 
