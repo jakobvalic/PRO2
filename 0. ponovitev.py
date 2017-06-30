@@ -39,14 +39,14 @@ print(nalozi('kolokviji.txt'))
 
 def vsote(vhodna, izhodna):
     '''Prebere, sešteje in zapiše v novo datoteko.'''
-    with open(izhodna, 'w', encoding = 'utf-8') as f:
+    with open(izhodna, 'w', encoding='utf-8') as f:
         podatki = nalozi(vhodna)
         for podatek in podatki:
             ime = podatek[0]
             ocene = podatek[1:]
-            print(ime, ', ', sum(ocene), file = f, sep = '')
+            print(ime, ', ', sum(ocene), file=f, sep='')
 
-vsote('kolokviji.txt', 'sestevki.txt')
+vsote('kolokviji.txt', 'sestevki_kolokvijev.txt')
 print()
 
 
